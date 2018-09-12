@@ -35,13 +35,28 @@ class Game {
     }
 
     public void playerMove() {
+
+        if (playerTurn == null){
+            playerTurn = Player.X;
+        }
+
         switch (playerTurn) {
             case X:
+                makeMove(playerX, playerTurn);
+                playerTurn = Player.O;
                 break;
             case O:
+                makeMove(playerO, playerTurn);
+                playerTurn = Player.X;
                 break;
-            default:
         }
+        showBoard();
+    }
+
+    private void makeMove(String playerName, Player player) {
+        commandLine.write("It's " + playerName + "time!");
+        Coordenate coordenate = commandLine.getCoordenate();
+        board[coordenate.getI()][coordenate.getJ()] = player.toString();
     }
 
     public void showBoard() {

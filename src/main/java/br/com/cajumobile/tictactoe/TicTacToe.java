@@ -7,6 +7,7 @@ public class TicTacToe {
         game.askForPlayersName();
         do{
             game.showBoard();
+            game.playerMove();
         }while(game.getRunning());
 
     }
