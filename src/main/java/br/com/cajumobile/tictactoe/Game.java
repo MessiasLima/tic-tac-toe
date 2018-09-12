@@ -11,6 +11,8 @@ class Game {
 
     private Player playerTurn;
 
+    private Player winner;
+
     private boolean running = true;
 
     Game() {
@@ -80,6 +82,7 @@ class Game {
                 commandLine.write("------------");
             }
         }
+        commandLine.write("\n\n");
     }
 
     private String getCellValue(String s) {
@@ -91,7 +94,86 @@ class Game {
     }
 
     void verifyVictory() {
+        switch (playerTurn){
+            case O:
+                verifyVictory(Player.X);
+                break;
+            case X:
+                verifyVictory(Player.O);
+                break;
+        }
+    }
 
+    private void verifyVictory(Player player) {
+        if (board[0][0].equals(player.toString())){
+            verifyVictoryLine(0, player);
+            verifyVictoryColumn(0, player);
+            verifyVictoryDiagonal(0, player);
+        }
+        if (winner != null){
+            showWinnerMessage(player);
+        }
+    }
+
+    private void showWinnerMessage(Player player) {
+        switch (player){
+            case X:
+                commandLine.write("########################################");
+                commandLine.write("Congratulations");
+                commandLine.write(playerX + " is the winner!");
+                commandLine.write("########################################");
+                break;
+            case O:
+                commandLine.write("########################################");
+                commandLine.write("Congratulations");
+                commandLine.write(playerO + " is the winner!");
+                commandLine.write("########################################");
+        }
+    }
+
+    private void verifyVictoryDiagonal(int i, Player player) {
+
+        switch (i){
+            case 0:
+                if (board[0][0] == null || board[1][1] == null || board[2][2] == null){
+                    return;
+                }
+                if (board[0][0].equals(player.toString()) && board[1][1].equals(player.toString()) && board[2][2].equals(player.toString())){
+                    running = false;
+                    winner = player;
+                }
+                break;
+            case 2:
+                if ( board[1][1] == null || board[0][2] == null || board[2][0] == null){
+                    return;
+                }
+                if (board[0][2].equals(player.toString()) && board[1][1].equals(player.toString()) && board[2][0].equals(player.toString())){
+                    running = false;
+                    winner = player;
+                }
+                break;
+        }
+    }
+
+    private void verifyVictoryColumn(int j, Player player) {
+        if (board[0][j] == null || board[1][j] == null || board[2][j] == null){
+            return;
+        }
+        if (board[0][j].equals(player.toString()) && board[1][j].equals(player.toString()) && board[2][j].equals(player.toString())){
+            running = false;
+            winner = player;
+        }
+    }
+
+    private void verifyVictoryLine(int i, Player player) {
+        if (board[i][0] == null || board[i][1] == null || board[i][2] == null){
+            return;
+        }
+
+        if (board[i][0].equals(player.toString()) && board[i][1].equals(player.toString()) && board[i][2].equals(player.toString())){
+            running = false;
+            winner = player;
+        }
     }
 
     public String getValueAtCoordenate(Coordenate coordenate) {
