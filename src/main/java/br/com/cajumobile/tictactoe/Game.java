@@ -9,6 +9,8 @@ class Game {
     private String playerX;
     private String playerO;
 
+    private Player playerTurn;
+
     Game() {
         this.commandLine = new CommandLine();
     }
@@ -30,5 +32,40 @@ class Game {
 
     public boolean getRunning() {
         return false;
+    }
+
+    public void playerMove() {
+        switch (playerTurn) {
+            case X:
+                break;
+            case O:
+                break;
+            default:
+        }
+    }
+
+    public void showBoard() {
+        commandLine.clear();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                commandLine.write(getCellValue(board[i][j]), false);
+                if (j == (board[i].length - 1)) {
+                    commandLine.write("");
+                } else {
+                    commandLine.write("|", false);
+                }
+            }
+            if (i != (board.length - 1)) {
+                commandLine.write("------------");
+            }
+        }
+    }
+
+    private String getCellValue(String s) {
+        if (s == null){
+            return "   ";
+        }else {
+            return " "+s+" ";
+        }
     }
 }
