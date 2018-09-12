@@ -5,9 +5,11 @@ import java.util.Scanner;
 class CommandLine {
 
     private final Scanner scanner;
+    private final Game game;
 
-    CommandLine() {
+    CommandLine(Game game) {
         scanner = new Scanner(System.in);
+        this.game = game;
     }
 
     void write(String text) {
@@ -42,6 +44,10 @@ class CommandLine {
             entry = readInt();
         }while (!isEntryValid(entry));
 
+        return entryToCoodenate(entry);
+    }
+
+    Coordenate entryToCoodenate(Integer entry) {
         switch (entry) {
             case 1:
                 return new Coordenate(0, 0);
@@ -62,13 +68,13 @@ class CommandLine {
             case 9:
                 return new Coordenate(2, 2);
             default:
-                return null;
+                throw new RuntimeException("Invalid coodenate");
         }
     }
 
     private boolean isEntryValid(Integer entry) {
         if (entry > 0 && entry < 10){
-            return true;
+            return game.getValueAtCoordenate(entryToCoodenate(entry)) == null;
         }else {
             write("Invalid entry");
             return false;

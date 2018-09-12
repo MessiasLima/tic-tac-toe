@@ -8,6 +8,7 @@ public class TicTacToe {
         do{
             game.showBoard();
             game.playerMove();
+            game.verifyVictory();
         }while(game.getRunning());
 
     }

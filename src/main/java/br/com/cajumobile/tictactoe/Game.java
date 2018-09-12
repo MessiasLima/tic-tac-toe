@@ -11,8 +11,14 @@ class Game {
 
     private Player playerTurn;
 
+    private boolean running = true;
+
     Game() {
-        this.commandLine = new CommandLine();
+        this.commandLine = new CommandLine(this);
+    }
+
+    String[][] getBoard(){
+        return board;
     }
 
     void showWelcomeMessage() {
@@ -31,7 +37,7 @@ class Game {
     }
 
     public boolean getRunning() {
-        return false;
+        return running;
     }
 
     public void playerMove() {
@@ -54,7 +60,7 @@ class Game {
     }
 
     private void makeMove(String playerName, Player player) {
-        commandLine.write("It's " + playerName + "time!");
+        commandLine.write("It's " + playerName + " turn!");
         Coordenate coordenate = commandLine.getCoordenate();
         board[coordenate.getI()][coordenate.getJ()] = player.toString();
     }
@@ -82,5 +88,13 @@ class Game {
         }else {
             return " "+s+" ";
         }
+    }
+
+    void verifyVictory() {
+
+    }
+
+    public String getValueAtCoordenate(Coordenate coordenate) {
+        return board[coordenate.getI()][coordenate.getJ()];
     }
 }
