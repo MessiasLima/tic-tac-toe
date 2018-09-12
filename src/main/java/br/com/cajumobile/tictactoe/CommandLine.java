@@ -1,13 +1,16 @@
 package br.com.cajumobile.tictactoe;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 class CommandLine {
 
+    private final Scanner scanner;
     private OS system;
 
     public CommandLine() {
         system = getOS();
+        scanner = new Scanner(System.in);
     }
 
     private OS getOS() {
@@ -56,5 +59,9 @@ class CommandLine {
         write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    }
+
+    public String read() {
+        return scanner.next();
     }
 }
