@@ -74,7 +74,7 @@ class CommandLine {
 
     private boolean isEntryValid(Integer entry) {
         if (entry > 0 && entry < 10){
-            return game.getValueAtCoordenate(entryToCoodenate(entry)) == null;
+            return game.getValueAtCoordenate(entryToCoodenate(entry)) == null ||  game.getValueAtCoordenate(entryToCoodenate(entry)).equals(" ");
         }else {
             write("Invalid entry");
             return false;
