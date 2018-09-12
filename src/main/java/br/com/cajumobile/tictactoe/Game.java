@@ -105,11 +105,22 @@ class Game {
     }
 
     private void verifyVictory(Player player) {
+
         if (board[0][0].equals(player.toString())){
             verifyVictoryLine(0, player);
             verifyVictoryColumn(0, player);
             verifyVictoryDiagonal(0, player);
+        }else if (board[0][1].equals(player.toString())){
+            verifyVictoryColumn(1, player);
+        }else if (board[0][2].equals(player.toString())){
+            verifyVictoryColumn(2, player);
+            verifyVictoryDiagonal(2, player);
+        }else if (board[1][0].equals(player.toString())){
+            verifyVictoryLine(1, player);
+        }else if (board[2][0].equals(player.toString())){
+            verifyVictoryColumn(2, player);
         }
+
         if (winner != null){
             showWinnerMessage(player);
         }
